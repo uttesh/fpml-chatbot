@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/fpml-chatbot/static/css/main.e6c13ad2.css",
+    "main.js": "/fpml-chatbot/static/js/main.bfb21e39.js",
+    "static/js/453.557f3fdf.chunk.js": "/fpml-chatbot/static/js/453.557f3fdf.chunk.js",
+    "index.html": "/fpml-chatbot/index.html",
+    "main.e6c13ad2.css.map": "/fpml-chatbot/static/css/main.e6c13ad2.css.map",
+    "main.bfb21e39.js.map": "/fpml-chatbot/static/js/main.bfb21e39.js.map",
+    "453.557f3fdf.chunk.js.map": "/fpml-chatbot/static/js/453.557f3fdf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.bfb21e39.js"
+  ]
+}
