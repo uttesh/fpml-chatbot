@@ -176,7 +176,9 @@ const Chatbot = () => {
           backgroundColor: "#f0f0f0"
         }}
       >
-        <Typography variant="body2">FPML Chatbot an OpenSource tool</Typography>
+        <Typography variant="body2">
+          FPML 5_12 Chatbot an OpenSource tool
+        </Typography>
       </Box>
     </Box>
   );
