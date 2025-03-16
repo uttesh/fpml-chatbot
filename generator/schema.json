@@ -1,0 +1,154 @@
+{
+    "xsd:schema": {
+        "@xmlns:ecore": "http://www.eclipse.org/emf/2002/Ecore",
+        "@xmlns": "http://www.fpml.org/FpML-5/confirmation",
+        "@xmlns:dsig": "http://www.w3.org/2000/09/xmldsig#",
+        "@xmlns:fpml-annotation": "http://www.fpml.org/annotation",
+        "@xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+        "@targetNamespace": "http://www.fpml.org/FpML-5/confirmation",
+        "@ecore:documentRoot": "FpML",
+        "@ecore:nsPrefix": "conf",
+        "@ecore:package": "org.fpml.confirmation",
+        "@version": "$Revision: 13800 $",
+        "@elementFormDefault": "qualified",
+        "@attributeFormDefault": "unqualified",
+        "xsd:annotation": [
+            {
+                "xsd:documentation": {
+                    "@xml:lang": "en",
+                    "#text": "products"
+                }
+            },
+            {
+                "xsd:documentation": {
+                    "@xml:lang": "en",
+                    "#text": "business process messaging"
+                }
+            },
+            {
+                "xsd:documentation": {
+                    "@xml:lang": "en",
+                    "#text": "reporting and settlement"
+                }
+            }
+        ],
+        "xsd:include": [
+            {
+                "@schemaLocation": "fpml-generic-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-standard-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-ird-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-fx-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-fx-targets-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-fx-accruals-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-eqd-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-return-swaps-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-cd-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-bond-option-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-correlation-swaps-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-dividend-swaps-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-variance-swaps-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-volatility-swaps-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-com-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-repo-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-sec-lending-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-clearing-processes-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-confirmation-processes-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-credit-event-notification-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-valuation-5-12.xsd"
+            },
+            {
+                "@schemaLocation": "fpml-loan-5-12.xsd"
+            }
+        ],
+        "xsd:complexType": {
+            "@name": "ValuationDocument",
+            "xsd:annotation": {
+                "xsd:documentation": {
+                    "@xml:lang": "en",
+                    "#text": "A type defining a content model that includes valuation (pricing and risk) data without expressing any processing intention."
+                }
+            },
+            "xsd:complexContent": {
+                "xsd:extension": {
+                    "@base": "DataDocument",
+                    "xsd:sequence": {
+                        "xsd:element": [
+                            {
+                                "@ref": "market",
+                                "@minOccurs": "0",
+                                "@maxOccurs": "unbounded"
+                            },
+                            {
+                                "@ref": "valuationSet",
+                                "@minOccurs": "0",
+                                "@maxOccurs": "unbounded"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "xsd:element": [
+            {
+                "@name": "dataDocument",
+                "@type": "DataDocument",
+                "xsd:annotation": {
+                    "xsd:documentation": {
+                        "@xml:lang": "en",
+                        "#text": "A document containing trade and/or portfolio and/or party data without expressing any processing intention."
+                    }
+                }
+            },
+            {
+                "@name": "valuationDocument",
+                "@type": "ValuationDocument",
+                "xsd:annotation": {
+                    "xsd:documentation": {
+                        "@xml:lang": "en",
+                        "#text": "A document that includes trade and/or valuation (pricing and risk) data without expressing any processing intention."
+                    }
+                }
+            }
+        ]
+    }
+}
