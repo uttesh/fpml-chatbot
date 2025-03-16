@@ -5,7 +5,9 @@ import {
   Typography,
   Button,
   Paper,
-  Autocomplete
+  Autocomplete,
+  AppBar,
+  Toolbar
 } from "@mui/material";
 import Fuse from "fuse.js";
 import fpmlData from "./merged_xsd_attributes.json"; // Load JSON
@@ -89,78 +91,92 @@ const Chatbot = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        maxWidth: "600px",
-        height: "500px",
-        padding: "16px"
-      }}
-    >
-      <Typography
-        variant="h6"
-        sx={{ textAlign: "center", fontWeight: "bold", marginBottom: "8px" }}
-      >
-        FPML Chatbot
-      </Typography>
+    <Box sx={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+      {/* Header */}
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6">FPML Chatbot</Typography>
+        </Toolbar>
+      </AppBar>
 
-      <Box
-        ref={chatContainerRef}
-        sx={{
-          flex: 1,
-          overflowY: "auto",
-          padding: "10px",
-          backgroundColor: "#f5f5f5"
-        }}
-      >
-        {messages.map((message, index) => (
-          <Paper
-            key={index}
-            sx={{
-              padding: "10px",
-              marginBottom: "8px",
-              maxWidth: "80%",
-              alignSelf: message.sender === "user" ? "flex-end" : "flex-start",
-              backgroundColor:
-                message.sender === "user" ? "#0078D7" : "#e0e0e0",
-              color: message.sender === "user" ? "#fff" : "#000"
+      {/* Chat Window */}
+      <Box sx={{ flex: 1, display: "flex", flexDirection: "column", p: 2 }}>
+        <Box
+          ref={chatContainerRef}
+          sx={{
+            flex: 1,
+            overflowY: "auto",
+            padding: "10px",
+            backgroundColor: "#f5f5f5",
+            borderRadius: "8px"
+          }}
+        >
+          {messages.map((message, index) => (
+            <Paper
+              key={index}
+              sx={{
+                padding: "10px",
+                marginBottom: "8px",
+                maxWidth: "80%",
+                alignSelf:
+                  message.sender === "user" ? "flex-end" : "flex-start",
+                backgroundColor:
+                  message.sender === "user" ? "#0078D7" : "#e0e0e0",
+                color: message.sender === "user" ? "#fff" : "#000"
+              }}
+            >
+              <Typography sx={{ whiteSpace: "pre-line" }}>
+                {message.text}
+              </Typography>
+            </Paper>
+          ))}
+        </Box>
+
+        {/* Input Box */}
+        <Box sx={{ display: "flex", gap: "8px", marginTop: "10px" }}>
+          <Autocomplete
+            options={fuse.search(input).map((result) => result.item)} // Use fuzzy search results
+            getOptionLabel={(option) => option.label || ""}
+            isOptionEqualToValue={(option, value) =>
+              option.label === value.label
+            }
+            onInputChange={(_, newInputValue) => setInput(newInputValue)} // Keep input state updated
+            onChange={(_, newValue) => {
+              setSelectedElement(newValue ? newValue.label : null);
+              setInput(newValue ? newValue.label : "");
             }}
-          >
-            <Typography sx={{ whiteSpace: "pre-line" }}>
-              {message.text}
-            </Typography>
-          </Paper>
-        ))}
+            renderOption={(props, option) => (
+              <li {...props} key={option.label}>
+                {option.label}
+              </li>
+            )}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                fullWidth
+                placeholder="Search for an XSD element..."
+                variant="outlined"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+              />
+            )}
+            sx={{ width: "100%" }}
+          />
+          <Button variant="contained" color="primary" onClick={handleSend}>
+            Send
+          </Button>
+        </Box>
       </Box>
 
-      <Box sx={{ display: "flex", gap: "8px", marginTop: "10px" }}>
-        <Autocomplete
-          options={xsdElements}
-          getOptionLabel={(option) => option.label || ""}
-          isOptionEqualToValue={(option, value) => option.label === value.label}
-          onChange={(_, newValue) => {
-            setSelectedElement(newValue ? newValue.label : null);
-            setInput(newValue ? newValue.label : "");
-          }}
-          renderOption={(props, option) => (
-            <li {...props} key={option.label}>
-              {option.label}
-            </li>
-          )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              fullWidth
-              placeholder="Search for an XSD element..."
-              variant="outlined"
-            />
-          )}
-          sx={{ width: "70%" }}
-        />
-        <Button variant="contained" color="primary" onClick={handleSend}>
-          Send
-        </Button>
+      {/* Footer */}
+      <Box
+        sx={{
+          textAlign: "center",
+          padding: "10px",
+          backgroundColor: "#f0f0f0"
+        }}
+      >
+        <Typography variant="body2">FPML Chatbot an OpenSource tool</Typography>
       </Box>
     </Box>
   );
